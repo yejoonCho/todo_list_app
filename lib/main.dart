@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
+import 'package:todo_list_app/core/apptheme.dart';
 import 'package:todo_list_app/presentation/home_screen.dart';
 
 void main() {
@@ -8,16 +10,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'todo_list_app',
-      theme: ThemeData(
-        primaryColor: const Color(0xffbebebe),
+    return Sizer(
+      builder: (context, orientation, deviceType) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'todo_list_app',
+        theme: AppTheme.lightTheme,
+        home: const HomeScreen(),
       ),
-      home: HomeScreen(),
     );
   }
 }
