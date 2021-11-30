@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:todo_list_app/core/apptheme.dart';
+import 'package:todo_list_app/core/app_theme.dart';
 import 'package:todo_list_app/presentation/home_screen.dart';
 
 void main() {
