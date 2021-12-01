@@ -41,7 +41,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   width: 48,
                   child: Icon(Icons.menu, size: 28),
                 ),
-                Text('Todo List', style: AppTheme.title),
+                Text('Todo List', style: AppTheme.title1),
                 const SizedBox(
                   width: 48,
                   child: Icon(
@@ -66,7 +66,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       child: Center(
                         child: Text(
                           kdayList[index],
-                          style: AppTheme.title.copyWith(fontSize: 22),
+                          style: AppTheme.title1.copyWith(fontSize: 22),
                         ),
                       ),
                     ),
@@ -155,8 +155,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                                     )
                                   : Text(
                                       '${date.day}',
-                                      style:
-                                          AppTheme.title.copyWith(fontSize: 22),
+                                      style: AppTheme.title1
+                                          .copyWith(fontSize: 22),
                                     ),
                             ),
                           ),
