@@ -1,7 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo_list_app/core/app_theme.dart';
+import 'package:todo_list_app/logic/notifier/login_notifier.dart';
+import 'package:todo_list_app/presentation/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -30,6 +35,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double paddingTop = MediaQuery.of(context).padding.top;
+    final _loginNotifier = Provider.of<LoginNotifier>(context);
     return Scaffold(
         body: Padding(
       padding: EdgeInsets.only(top: paddingTop + 50, left: 20, right: 20),
@@ -47,7 +53,17 @@ class LoginScreen extends StatelessWidget {
             child: const RiveAnimation.asset('assets/todo.riv'),
           ),
           const SizedBox(height: 60),
-          _socialLoginButton('assets/logo/google.png', '구글 로그인'),
+          InkWell(
+            onTap: () {
+              _loginNotifier.loginWithGoogle();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ));
+            },
+            child: _socialLoginButton('assets/logo/google.png', '구글 로그인'),
+          ),
           const SizedBox(height: 30),
           _socialLoginButton('assets/logo/facebook.png', '페이스북 로그인'),
         ],
