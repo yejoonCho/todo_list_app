@@ -1,12 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo_list_app/core/app_theme.dart';
+import 'package:todo_list_app/logic/bloc/task_bloc.dart';
 import 'package:todo_list_app/logic/notifier/login_notifier.dart';
-import 'package:todo_list_app/presentation/home_screen.dart';
 import 'package:todo_list_app/presentation/login_screen.dart';
+import 'package:todo_list_app/repository/task_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,9 @@ void main() async {
     providers: [
       ChangeNotifierProvider<LoginNotifier>(
         create: (context) => LoginNotifier(),
+      ),
+      BlocProvider<TaskBloc>(
+        create: (context) => TaskBloc(taskRepository: TaskRepository()),
       )
     ],
     child: const MyApp(),

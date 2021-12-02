@@ -29,7 +29,7 @@ class LoginNotifier extends ChangeNotifier {
     await FirebaseAuth.instance.signInWithCredential(_credential);
   }
 
-  Future<void> signOutFromGoogle() async {
+  Future<void> logOutFromGoogle() async {
     await _googleSignIn.signOut();
     await _auth.signOut();
   }
