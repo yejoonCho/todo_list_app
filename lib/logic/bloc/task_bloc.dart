@@ -13,9 +13,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   @override
   Stream<TaskState> mapEventToState(TaskEvent event) async* {
     if (event is CreateTask) {
+      yield TaskIsLoading();
+      taskRepository.addData(event.task);
     } else if (event is ReadTask) {
       yield TaskIsLoading();
-      final List<Task> tasks = await taskRepository.fetch();
+      final List<Task> tasks = await taskRepository.fetchData();
       yield TaskIsLoaded(tasks: tasks);
     } else if (event is UpdateTask) {
     } else if (event is DeleteTask) {}

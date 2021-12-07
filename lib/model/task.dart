@@ -19,8 +19,8 @@ class Task {
   Map<String, dynamic> toMap() {
     return {
       'content': content,
-      'isAchieved': isAchieved,
-      'time': time,
+      'is_achieved': isAchieved,
+      'time': Timestamp.fromDate(time),
     };
   }
 }
