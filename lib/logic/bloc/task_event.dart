@@ -14,8 +14,9 @@ class CreateTask extends TaskEvent {
 class ReadTask extends TaskEvent {}
 
 class UpdateTask extends TaskEvent {
-  final Task task;
-  UpdateTask({required this.task});
+  final Task oldTask;
+  final Task newTask;
+  UpdateTask({required this.oldTask, required this.newTask});
 }
 
 class DeleteTask extends TaskEvent {}

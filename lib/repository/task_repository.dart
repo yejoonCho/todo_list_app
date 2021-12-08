@@ -13,4 +13,8 @@ class TaskRepository {
   Future<void> addData(Task task) async {
     await collection.add(task.toMap());
   }
+
+  Future<void> updateData(Task oldTask, Task newTask) async {
+    await collection.doc(oldTask.id).update(newTask.toMap());
+  }
 }

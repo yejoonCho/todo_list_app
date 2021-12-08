@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (context) => const CreateDialog(),
+            builder: (context) => CreateDialog(),
           );
         },
         child: const Icon(Icons.add, size: 32),
@@ -65,15 +65,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           value: false,
                           onChanged: (value) {},
                         ),
-                        Text(
-                          tasks[i].content,
-                          style: AppTheme.content1,
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  CreateDialog(task: tasks[i]),
+                            );
+                          },
+                          child: Text(
+                            tasks[i].content,
+                            style: AppTheme.content1,
+                          ),
                         ),
                         const Spacer(),
-                        GestureDetector(
-                          onTap: () {},
-                          child: const Icon(Icons.more_horiz),
-                        ),
                       ],
                     )
                 ],

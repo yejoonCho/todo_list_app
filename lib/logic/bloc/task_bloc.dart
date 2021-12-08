@@ -20,6 +20,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       final List<Task> tasks = await taskRepository.fetchData();
       yield TaskIsLoaded(tasks: tasks);
     } else if (event is UpdateTask) {
+      taskRepository.updateData(event.oldTask, event.newTask);
     } else if (event is DeleteTask) {}
   }
 }

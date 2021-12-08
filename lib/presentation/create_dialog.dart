@@ -6,7 +6,8 @@ import 'package:todo_list_app/logic/bloc/task_event.dart';
 import 'package:todo_list_app/model/task.dart';
 
 class CreateDialog extends StatefulWidget {
-  const CreateDialog({Key? key}) : super(key: key);
+  final Task? task;
+  CreateDialog({this.task});
 
   @override
   State<CreateDialog> createState() => _CreateDialogState();
@@ -18,7 +19,8 @@ class _CreateDialogState extends State<CreateDialog> {
   @override
   void initState() {
     super.initState();
-    _textEditingController = TextEditingController();
+    _textEditingController =
+        TextEditingController(text: widget.task?.content ?? '');
   }
 
   @override
@@ -49,13 +51,19 @@ class _CreateDialogState extends State<CreateDialog> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  final task = Task(
+                  final newTask = Task(
                     content: _textEditingController.text,
                     isAchieved: false,
                     time: DateTime.now(),
                   );
-                  Provider.of<TaskBloc>(context, listen: false)
-                      .add(CreateTask(task: task));
+                  if (widget.task?.content == null) {
+                    Provider.of<TaskBloc>(context, listen: false)
+                        .add(CreateTask(task: newTask));
+                  } else {
+                    Provider.of<TaskBloc>(context, listen: false).add(
+                        UpdateTask(oldTask: widget.task!, newTask: newTask));
+                  }
+
                   Navigator.pop(context);
                   Provider.of<TaskBloc>(context, listen: false).add(ReadTask());
                 },
