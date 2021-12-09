@@ -59,27 +59,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(height: 50),
                   for (int i = 0; i < tasks.length; i++)
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: false,
-                          onChanged: (value) {},
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) =>
-                                  CreateDialog(task: tasks[i]),
-                            );
-                          },
-                          child: Text(
-                            tasks[i].content,
-                            style: AppTheme.content1,
+                    Dismissible(
+                      key: Key(tasks[i].id!),
+                      onDismissed: (direction) {
+                        Provider.of<TaskBloc>(context, listen: false)
+                            .add(DeleteTask(task: tasks[i]));
+                        Provider.of<TaskBloc>(context, listen: false)
+                            .add(ReadTask());
+                      },
+                      child: Row(
+                        children: [
+                          Checkbox(
+                            value: false,
+                            onChanged: (value) {},
                           ),
-                        ),
-                        const Spacer(),
-                      ],
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    CreateDialog(task: tasks[i]),
+                              );
+                            },
+                            child: Text(
+                              tasks[i].content,
+                              style: AppTheme.content1,
+                            ),
+                          ),
+                          const Spacer(),
+                        ],
+                      ),
                     )
                 ],
               );
